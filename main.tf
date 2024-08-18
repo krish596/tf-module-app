@@ -38,9 +38,9 @@ resource "aws_launch_template" "main" {
   image_id      = data.aws_ami.ami.id
   instance_type = var.instance_type
   user_data = filebase64(templatefile("${path.module}/userdata.sh",
-  {
-    component = var.component
-}))
+    {
+      component = var.component
+  }))
 
   tag_specifications {
     resource_type = "instance"
