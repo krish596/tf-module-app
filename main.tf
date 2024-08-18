@@ -33,3 +33,33 @@ resource "aws_security_group" "main" {
   }
 }
 
+resource "aws_launch_template" "main" {
+  name_prefix   = "${local.name_prefix}-asg"
+  image_id      = data.aws_ami.ami.id
+  instance_type = var.instance_type
+  user_data = filebase64(templatefile("${path.module}/userdata.sh"
+  {
+    component = var.component
+}))
+
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = merge(local.tags, {Name = "${local.name_prefix}-ec2"})
+  }
+
+
+}
+
+# resource "aws_autoscaling_group" "bar" {
+#   availability_zones = ["us-east-1a"]
+#   desired_capacity   = 1
+#   max_size           = 1
+#   min_size           = 1
+#
+#   launch_template {
+#     id      = aws_launch_template.foobar.id
+#     version = "$Latest"
+#   }
+# }
+
