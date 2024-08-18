@@ -89,7 +89,7 @@ resource "aws_lb_target_group" "main" {
 }
 
 resource "aws_lb_listener_rule" "main" {
-  listener_arn = var.listener_arn
+  listener_arn = var.listener
   priority     = var.lb_priority
 
   action {

@@ -12,7 +12,7 @@ variable "desired_capacity" {}
 variable "max_size" {}
 variable "min_size" {}
 variable "alb_name" {}
-variable "listener_arn" {}
+variable "listener" {}
 variable "lb_priority" {}
 
 
