@@ -2,6 +2,6 @@ locals {
   name_prefix = "${var.env}-${var.component}"
   tags = merge(var.tags, {tf-module-name = "component"}, {env = var.env})
 
-  parameters = [var.component, var.parameters]
+  parameters =concat(var.parameters, [var.component])
   policy_resources =[ for i in parameters:"arn:aws:ssm:us-east-1:014498634764:parameter/${i}.${var.env}.*"]
 }
