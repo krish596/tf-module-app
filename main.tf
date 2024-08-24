@@ -83,6 +83,12 @@ resource "aws_autoscaling_group" "main" {
     propagate_at_launch = true
     value               = local.name_prefix
   }
+
+  tag {
+    key                 = "Monitor"
+    propagate_at_launch = yes
+    value               = local.name_prefix
+  }
 }
 
 resource "aws_route53_record" "main" {
