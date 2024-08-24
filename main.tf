@@ -30,7 +30,6 @@ resource "aws_security_group" "main" {
     to_port          = 9100
     protocol         = "tcp"
     cidr_blocks      = var.monitoring_ingress_cidr
-
   }
 
   egress {
