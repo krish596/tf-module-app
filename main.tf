@@ -48,8 +48,8 @@ resource "aws_security_group_rule" "nginx_exporter" {
   to_port           = 9113
   protocol          = "tcp"
   cidr_blocks       = var.monitoring_ingress_cidr
-  security_group_id = [aws_security_group.main.id]
-  description = "prometheus nginx exporter"
+  security_group_id = aws_security_group.main.id
+  description = "nginx prometheus exporter"
 }
 
 resource "aws_launch_template" "main" {
