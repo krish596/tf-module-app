@@ -142,6 +142,16 @@ resource "aws_lb_target_group" "public" {
   protocol = "HTTP"
   vpc_id   = var.default_vpc_id
 
+  health_check {
+    enabled = true
+    healthy_threshold = 2
+    path = "/"
+    port = var.port
+    interval = 5
+    unhealthy_threshold = 2
+    timeout = 2
+    matcher = "404"
+  }
 }
 
 resource "aws_lb_target_group_attachment" "public" {
