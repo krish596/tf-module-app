@@ -145,7 +145,7 @@ resource "aws_lb_target_group" "public" {
   health_check {
     enabled = true
     healthy_threshold = 2
-    interval = 5
+    interval = 10
     path = "/"
     port = var.port
     unhealthy_threshold = 2
