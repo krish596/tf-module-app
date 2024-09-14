@@ -256,13 +256,3 @@ resource "aws_lb_listener_rule" "public" {
 }
 
 
-resource "aws_security_group_rule" "nginx_exporter" {
-  count             = var.component == "frontend" ? 1 : 0
-  type              = "ingress"
-  from_port         = 9113
-  to_port           = 9113
-  protocol          = "tcp"
-  cidr_blocks       = var.monitoring_ingress_cidr
-  security_group_id = aws_security_group.main.id
-  description       = "Nginx Prometheus Exporter"
-}
