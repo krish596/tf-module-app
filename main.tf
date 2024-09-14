@@ -31,6 +31,13 @@ resource "aws_security_group" "main" {
     protocol         = "tcp"
     cidr_blocks      = var.monitoring_ingress_cidr
   }
+  ingress {
+    description = "Nginx Prometheus Exporter"
+    from_port        = 9113
+    to_port          = 9113
+    protocol         = "tcp"
+    cidr_blocks      = var.monitoring_ingress_cidr
+  }
 
   egress {
     from_port        = 0
@@ -51,6 +58,7 @@ resource "aws_security_group_rule" "nginx_exporter" {
   security_group_id = aws_security_group.main.id
   description       = "Nginx Prometheus Exporter"
 }
+
 
 resource "aws_iam_policy" "main" {
   name        = "${local.name_prefix}-policy"
