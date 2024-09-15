@@ -50,8 +50,10 @@ resource "aws_security_group_rule" "nginx_exporter" {
   protocol          = "tcp"
   cidr_blocks       = var.monitoring_ingress_cidr
   security_group_id = aws_security_group.main.id
+
   description       = "Nginx Prometheus Exporter"
 }
+
 
 
 resource "aws_iam_policy" "main" {
@@ -132,17 +134,17 @@ resource "aws_launch_template" "main" {
       env       = var.env
     }))
 
-   block_device_mappings {
-     device_name = "/dev/sda1"
-
-     ebs {
-       delete_on_termination = "true"
-       encrypted             = "true"
-       kms_key_id            = var.kms_key_id
-       volume_size           = 10
-       volume_type           = "gp2"
-     }
-   }
+#    block_device_mappings {
+#      device_name = "/dev/sda1"
+#
+#      ebs {
+#        delete_on_termination = "true"
+#        encrypted             = "true"
+#        kms_key_id            = var.kms_key_id
+#        volume_size           = 10
+#        volume_type           = "gp2"
+#      }
+#    }
 
   tag_specifications {
     resource_type = "instance"
@@ -170,8 +172,9 @@ resource "aws_autoscaling_group" "main" {
   }
   tag {
     key                 = "Monitor"
-    propagate_at_launch = true
     value               = "yes"
+    propagate_at_launch = true
+
   }
 
 }
@@ -268,7 +271,5 @@ resource "aws_lb_listener_rule" "public" {
     }
   }
 }
-
-
 
 
